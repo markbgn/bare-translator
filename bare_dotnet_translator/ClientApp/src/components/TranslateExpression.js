@@ -1,6 +1,9 @@
 ﻿import React, { useState } from 'react';
 
+import "./TranslateExpression.css";
+
 const TranslateExpression = () => {
+    // setting variable and input states
     const [expToTranslate, setExpToTranslate] = useState("");
     const [expTranslated, setExpTranslated] = useState("");
 
@@ -22,10 +25,12 @@ const TranslateExpression = () => {
     }
 
     return (
-        <main>
-            <textarea type="text" onChange={handleInputChange} value={expToTranslate} rows={3} />
-            <button onClick={translateHandler} >Translate</button>
-            <textarea type="text" readOnly="readonly" value={expTranslated} rows={3} />
+        <main >
+            <div className="trinterface">
+                <textarea className="textarea" type="text" onChange={handleInputChange} value={expToTranslate} rows={3} />
+                <button className="button" onClick={translateHandler} >Translate</button>
+                <textarea className="textarea" type="text" readOnly="readonly" value={expTranslated} rows={3} />
+            </div>
         </main>
     )
 }

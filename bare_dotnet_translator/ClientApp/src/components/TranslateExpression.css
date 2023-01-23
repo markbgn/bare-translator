@@ -1,0 +1,26 @@
+﻿.trinterface {
+    padding: 0.8rem;
+    margin: 1rem auto;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.button {
+    border: 1px solid white;
+    background-color: white;
+    color: rgb(44, 54, 89);
+    border-radius: 12px;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    outline: none;
+}
+
+.textarea {
+    max-height: 5rem;
+}
+
+.textarea:focus {
+    outline: none;
+}
