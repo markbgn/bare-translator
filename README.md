@@ -35,7 +35,7 @@ A third table was created for the stored languages with an _id_ and _language_ c
 
 I created a _TranslationDAO_ class (short for Data Access Object) where I estabilished a connection with my MySQL server. MySQL.Data NuGet package was required to do so. For retrieving the data I used two queries, one to identify the id of the expression to be translated, the other one to look up the hungarian term in the _hungarian_ table.
 
-![alt text](relation_diagram)
+![alt text](relation_diagram.png)
 
 Encountered error: as it can be seen in the hungarian table, special characters such as _ő_ and _ű_ are unsupported. After trying everything from importing .CSV with UTF-8 encoding, to setting the whole translation-schema to UTF-8 encoding and trying to import data as .JSON, MySQL failed to import data with special characters due to _charmap codec error_. Turns out it is a known bug by the community nad the developers.
 
