@@ -13,35 +13,42 @@ namespace bare_dotnet_translator
         /// <returns></returns>
         public string getTranslatedExpression(string searchedExpression)
         {
-            // return value for translation
-            string returnValue = "";
-
-            // connection to mysql server
-            MySqlConnection connection = new MySqlConnection(connectionString);
-            connection.Open();
-
-            // define SQL statement to fetch id of english expression
-            MySqlCommand command = new MySqlCommand();
-            // this way database is protected against SQL Injection
-            command.CommandText = "SELECT id FROM translation_schema.english WHERE expression =@search";
-            command.Parameters.AddWithValue("@search", searchedExpression);
-            command.Connection = connection;
-
-            using (MySqlDataReader reader = command.ExecuteReader())
+            try
             {
-                if (reader.HasRows)
+                // return value for translation
+                string returnValue = "";
+
+                // connection to mysql server
+                MySqlConnection connection = new MySqlConnection(connectionString);
+                connection.Open();
+
+                // define SQL statement to fetch id of english expression
+                MySqlCommand command = new MySqlCommand();
+                // this way database is protected against SQL Injection
+                command.CommandText = "SELECT id FROM translation_schema.english WHERE expression =@search";
+                command.Parameters.AddWithValue("@search", searchedExpression);
+                command.Connection = connection;
+
+                using (MySqlDataReader reader = command.ExecuteReader())
                 {
-                    while (reader.Read())
+                    if (reader.HasRows)
                     {
-                        int rowId = reader.GetInt32(0);
-                        returnValue = GetHungarianExpression(rowId);
+                        while (reader.Read())
+                        {
+                            int rowId = reader.GetInt32(0);
+                            returnValue = GetHungarianExpression(rowId);
+                        }
                     }
+                    else
+                        return "";
                 }
-                else
-                    return "";
+                connection.Close();
+                return returnValue;
             }
-            connection.Close();
-            return returnValue;
+            catch
+            {
+                return "Database access error.";
+            }
         }
 
         /// <summary>
@@ -51,32 +58,39 @@ namespace bare_dotnet_translator
         /// <returns></returns>
         private string GetHungarianExpression(int rowId)
         {
-            // return value for translation
-            string returnValue = "";
-
-            // connection to mysql server
-            MySqlConnection connection = new MySqlConnection(connectionString);
-            connection.Open();
-
-            MySqlCommand finalCommand = new MySqlCommand();
-
-            finalCommand.CommandText = "SELECT expression FROM translation_schema.hungarian WHERE id IN (@searchId)";
-            finalCommand.Parameters.AddWithValue("@searchId", rowId);
-            finalCommand.Connection = connection;
-
-            using (MySqlDataReader reader = finalCommand.ExecuteReader())
+            try
             {
-                if (reader.HasRows)
+                // return value for translation
+                string returnValue = "";
+
+                // connection to mysql server
+                MySqlConnection connection = new MySqlConnection(connectionString);
+                connection.Open();
+
+                MySqlCommand finalCommand = new MySqlCommand();
+
+                finalCommand.CommandText = "SELECT expression FROM translation_schema.hungarian WHERE id IN (@searchId)";
+                finalCommand.Parameters.AddWithValue("@searchId", rowId);
+                finalCommand.Connection = connection;
+
+                using (MySqlDataReader reader = finalCommand.ExecuteReader())
                 {
-                    while (reader.Read())
+                    if (reader.HasRows)
                     {
-                        returnValue = reader.GetString(0);
+                        while (reader.Read())
+                        {
+                            returnValue = reader.GetString(0);
+                        }
                     }
+                    else
+                        return "";
                 }
-                else
-                    return "";
+                return returnValue;
             }
-            return returnValue;
+            catch
+            {
+                return "Database access error.";
+            }
         }
     }
 }
