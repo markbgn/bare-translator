@@ -51,4 +51,10 @@ The frontend side of the application consists of a single component with a TextA
 
 - Creating a more sophisticated and visually appealing error handling with special components.
 - With further research and knowledge I could definitely create a better logic for the databaase side of the project.
-- To be able to translate to other languages as well a language selector combobox could be used and database should be expanded.
+- To be able to translate to other languages as well, a language selector combobox could be used and database should be expanded.
+
+## Screenshots of working application
+
+![Translation](translation1.png)
+![Translation](translation2.png)
+![Missing translation](missing_data_handling.png)
