@@ -20,14 +20,11 @@ namespace bare_dotnet_translator
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            // modified expression with correct lookup syntax
-            string modExpression = "%" + searchedExpression + "%";
-
             // define SQL statement to fetch id of english expression
             MySqlCommand command = new MySqlCommand();
             // this way database is protected against SQL Injection
-            command.CommandText = "SELECT id FROM translation_schema.english WHERE expression LIKE @search";
-            command.Parameters.AddWithValue("@search", modExpression);
+            command.CommandText = "SELECT id FROM translation_schema.english WHERE expression =@search";
+            command.Parameters.AddWithValue("@search", searchedExpression);
             command.Connection = connection;
 
             using (MySqlDataReader reader = command.ExecuteReader())
