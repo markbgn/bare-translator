@@ -14,9 +14,10 @@ const TranslateExpression = () => {
         if (expToTranslate !== "") {
             const response = await fetch(`translation/${expToTranslate}`);
             const data = await response.text();
-            setExpTranslated(data);
+            console.log(data);
+            data == "" ? alert("No translation found.") : setExpTranslated(data);
         } else {
-            console.log("Input is empty");
+            alert("Input something to translate!")
         }
     }
 
