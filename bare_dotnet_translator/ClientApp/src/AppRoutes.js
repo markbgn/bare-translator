@@ -1,23 +1,14 @@
-import { Counter } from "./components/Counter";
-import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import TranslateExpression from "./components/TranslateExpression";
 
 const AppRoutes = [
+  //{
+  //  index: true,
+  //  element: <Home />
+  //},
   {
+        /*path: '/translate-expression',*/
     index: true,
-    element: <Home />
-  },
-  {
-    path: '/counter',
-    element: <Counter />
-  },
-  {
-    path: '/fetch-data',
-    element: <FetchData />
-  },
-  {
-    path: '/translate-expression',
     element: <TranslateExpression />
   }
 ];
